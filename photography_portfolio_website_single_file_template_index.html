@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Through My Lens | Photography</title>
+  <meta name="description" content="Through My Lens — a curated portfolio across portraits, landscapes, street, events, and macro with booking information." />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b0d12;          /* deep graphite */
+      --bg-2:#0e1118;         /* card background */
+      --txt:#e7e9ee;
+      --muted:#a3a9b7;
+      --brand:#8fd3ff;        /* accent */
+      --brand-2:#a58cff;      /* secondary accent */
+      --ring: #ffffff25;
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0; color:var(--txt); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height:1.5; background:
+      radial-gradient(1200px 600px at 100% -10%, #2b1f63 0%, transparent 60%),
+      radial-gradient(1200px 600px at -10% 120%, #164b6d 0%, transparent 65%),
+      linear-gradient(180deg, #0a0c11 0%, #0b0d12 55%, #0b0d12 100%);
+      /* subtle noise overlay */
+      position:relative;
+    }
+    body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.13;mix-blend-mode:soft-light;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.25"/></svg>');background-size:160px 160px}
+
+    /* Layout */
+    .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(140%) blur(10px);background:linear-gradient(to bottom, #0b0d12cc, #0b0d1200);}
+    nav{display:flex;align-items:center;gap:18px;justify-content:space-between;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--txt)}
+    .brand-logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow: var(--shadow)}
+    .brand h1{font: 700 20px/1 Playfair Display, serif; letter-spacing:.3px;margin:0}
+    .nav-links{display:flex;gap:6px;flex-wrap:wrap}
+    .nav-links a{color:var(--txt);text-decoration:none;padding:10px 12px;border-radius:12px}
+    .nav-links a:hover{background: #ffffff10}
+    .cta{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0a0b0f;padding:10px 14px;border-radius:12px;text-decoration:none;font-weight:700;box-shadow: var(--shadow)}
+
+    /* Hero */
+    .hero{padding:90px 0 60px}
+    .hero h2{font:700 54px/1.05 Playfair Display, serif;margin:0 0 16px}
+    .hero p{max-width:720px;color:var(--muted);font-size:18px;margin:0 0 24px}
+    .chip{display:inline-flex;gap:10px;align-items:center;background:#ffffff08;border:1px solid var(--ring);padding:8px 12px;border-radius:999px;color:var(--muted);font-size:14px}
+
+    /* Tabs */
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 24px}
+    .tab{border:1px solid var(--ring);background:#ffffff08;color:var(--txt);padding:10px 14px;border-radius:999px;cursor:pointer}
+    .tab[aria-selected="true"]{background:linear-gradient(135deg,#ffffff14,#ffffff08);border-color:#ffffff33}
+
+    /* Gallery Cards */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{grid-column:span 4;min-height:240px;background:linear-gradient(180deg,#101521,#0c0f16);border:1px solid var(--ring);border-radius:var(--radius);overflow:hidden;position:relative;box-shadow:var(--shadow);transition:transform .15s ease, box-shadow .15s}
+    .card:hover{transform:translateY(-2px);box-shadow:0 20px 40px rgba(0,0,0,.45)}
+    .ph{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;color:#ffffff22;font-size:36px;letter-spacing:2px;text-transform:uppercase}
+    .card img{width:100%;height:100%;object-fit:cover;display:block}
+    .badge{position:absolute;left:10px;top:10px;background:#0009;color:#fff;padding:6px 10px;border-radius:999px;font-size:12px;border:1px solid #ffffff33}
+
+    .section{padding:60px 0}
+    h3.section-title{font:700 30px/1.1 Playfair Display, serif;margin:0 0 16px}
+    p.lead{color:var(--muted);max-width:72ch}
+
+    /* About & Services cards */
+    .flex{display:flex;gap:18px;flex-wrap:wrap}
+    .panel{flex:1 1 320px;background:linear-gradient(180deg,#101521,#0c0f16);border:1px solid var(--ring);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+    .panel h4{margin:0 0 8px;font: 700 20px/1.2 Inter}
+
+    /* Contact */
+    form{display:grid;gap:12px;max-width:720px}
+    input,textarea{background:#0f141f;color:var(--txt);border:1px solid var(--ring);border-radius:12px;padding:12px;font:inherit}
+    textarea{min-height:120px;resize:vertical}
+    button{justify-self:start;border:0;border-radius:12px;padding:12px 16px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0a0b0f;font-weight:800;cursor:pointer;box-shadow:var(--shadow)}
+
+    /* Lightbox */
+    dialog{border:0;border-radius:20px;padding:0;background:#000000cc} 
+    .lightbox img{max-width:90vw;max-height:86vh;display:block}
+
+    /* Footer */
+    footer{padding:30px 0;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width:1100px){.card{grid-column:span 6}}
+    @media (max-width:700px){.card{grid-column:span 12}.hero h2{font-size:38px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <a class="brand" href="#home" aria-label="Home">
+          <span class="brand-logo" aria-hidden="true"></span>
+          <h1>Through My Lens</h1>
+        </a>
+        <div class="nav-links" role="tablist" aria-label="Primary">
+          <a href="#portfolio" role="tab">Portfolio</a>
+          <a href="#services" role="tab">Services</a>
+          <a href="#about" role="tab">About</a>
+          <a href="#contact" role="tab">Contact</a>
+          <a class="cta" href="#contact">Book a Shoot</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home" class="wrap hero">
+    <div class="chip">Portraits • Landscapes • Street • Events • Macro</div>
+    <h2>Story‑driven photography with a <span style="background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">classy, modern</span> aesthetic.</h2>
+    <p>Through My Lens is a quiet look at light, place, and people. This page gathers work across genres—a living sketchbook where portraits meet horizons, city rhythms meet small details. The intent is simple: thoughtful compositions, clean color, and images that feel honest.</p>
+  </main>
+
+  <section id="portfolio" class="wrap section"> class="wrap section">
+    <h3 class="section-title">Portfolio</h3>
+    <p class="lead">Browse by category. Click any image to view large. Replace the placeholder images with your own file paths in the HTML <code>&lt;img&gt;</code> tags.
+    </p>
+
+    <div class="tabs" role="tablist" aria-label="Portfolio categories">
+      <button class="tab" role="tab" aria-selected="true" data-filter="all">All</button>
+      <button class="tab" role="tab" data-filter="portrait">Portrait</button>
+      <button class="tab" role="tab" data-filter="landscape">Landscape</button>
+      <button class="tab" role="tab" data-filter="street">Street</button>
+      <button class="tab" role="tab" data-filter="events">Events</button>
+      <button class="tab" role="tab" data-filter="macro">Macro</button>
+    </div>
+
+    <div class="grid" id="gallery" aria-live="polite">
+      <!-- PORTRAIT -->
+      <figure class="card" data-tags="portrait">
+        <span class="badge">Portrait</span>
+        <img src="images/portraits/1J7A5084.JPG" alt="Portrait close‑up of a person in soft light" />
+      </figure>
+      <figure class="card" data-tags="portrait">
+        <span class="badge">Portrait</span>
+        <img src="images/portraits/1J7A5094edit.jpg" alt="Outdoor portrait at golden hour" />
+      </figure>
+      <figure class="card" data-tags="portrait">
+        <span class="badge">Portrait</span>
+        <img src="images/portraits/1J7A5740edit.jpg" alt="Studio portrait with graphic shadows" />
+      </figure>
+      <figure class="card" data-tags="portrait">
+        <span class="badge">Portrait</span>
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop" alt="Black and white portrait with dramatic light" />
+      </figure>
+
+      <!-- LANDSCAPE -->
+      <figure class="card" data-tags="landscape">
+        <span class="badge">Landscape</span>
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop" alt="Mountain landscape at sunrise" />
+      </figure>
+      <figure class="card" data-tags="landscape">
+        <span class="badge">Landscape</span>
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="Desert dunes at dusk" />
+      </figure>
+      <figure class="card" data-tags="landscape">
+        <span class="badge">Landscape</span>
+        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=1200&auto=format&fit=crop" alt="Coastal cliffs and waves" />
+      </figure>
+      <figure class="card" data-tags="landscape">
+        <span class="badge">Landscape</span>
+        <img src="https://images.unsplash.com/photo-1501785888041-83c9e0e27a40?q=80&w=1200&auto=format&fit=crop" alt="Forest valley under clouds" />
+      </figure>
+
+      <!-- STREET -->
+      <figure class="card" data-tags="street">
+        <span class="badge">Street</span>
+        <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop" alt="Street scene with reflections" />
+      </figure>
+      <figure class="card" data-tags="street">
+        <span class="badge">Street</span>
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop" alt="Neon street at night in rain" />
+      </figure>
+      <figure class="card" data-tags="street">
+        <span class="badge">Street</span>
+        <img src="https://images.unsplash.com/photo-1486334803289-1623f249dd1e?q=80&w=1200&auto=format&fit=crop" alt="Candid moment on a crosswalk" />
+      </figure>
+      <figure class="card" data-tags="street">
+        <span class="badge">Street</span>
+        <img src="https://images.unsplash.com/photo-1508057198894-247b23fe5ade?q=80&w=1200&auto=format&fit=crop" alt="Subway platform motion blur" />
+      </figure>
+
+      <!-- EVENTS -->
+      <figure class="card" data-tags="events">
+        <span class="badge">Events</span>
+        <img src="https://images.unsplash.com/photo-1464375117522-1311dd5a0345?q=80&w=1200&auto=format&fit=crop" alt="Live event stage lights" />
+      </figure>
+      <figure class="card" data-tags="events">
+        <span class="badge">Events</span>
+        <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=1200&auto=format&fit=crop" alt="Wedding couple first dance" />
+      </figure>
+      <figure class="card" data-tags="events">
+        <span class="badge">Events</span>
+        <img src="https://images.unsplash.com/photo-1526045478516-99145907023c?q=80&w=1200&auto=format&fit=crop" alt="Conference keynote crowd" />
+      </figure>
+      <figure class="card" data-tags="events">
+        <span class="badge">Events</span>
+        <img src="https://images.unsplash.com/photo-1500530857613-a45767d1c101?q=80&w=1200&auto=format&fit=crop" alt="Outdoor festival lights" />
+      </figure>
+
+      <!-- MACRO -->
+      <figure class="card" data-tags="macro">
+        <span class="badge">Macro</span>
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1200&auto=format&fit=crop" alt="Macro leaf veins" />
+      </figure>
+      <figure class="card" data-tags="macro">
+        <span class="badge">Macro</span>
+        <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?q=80&w=1200&auto=format&fit=crop" alt="Macro water droplet on petal" />
+      </figure>
+      <figure class="card" data-tags="macro">
+        <span class="badge">Macro</span>
+        <img src="https://images.unsplash.com/photo-1490638110263-0f6eff2b6e39?q=80&w=1200&auto=format&fit=crop" alt="Close detail of moss and dew" />
+      </figure>
+      <figure class="card" data-tags="macro">
+        <span class="badge">Macro</span>
+        <img src="https://images.unsplash.com/photo-1502849394219-6d22b6f1e82d?q=80&w=1200&auto=format&fit=crop" alt="Insect wing texture" />
+      </figure>
+    </div>
+  </section>
+
+  <section id="services" class="wrap section">
+    <h3 class="section-title">Services & Rates</h3>
+    <p class="lead">Flexible packages for individuals, brands, and events. For custom campaigns or travel assignments, please get in touch with your brief and timeline.</p>
+    <div class="flex">
+      <div class="panel">
+        <h4>Portrait Sessions</h4>
+        <p>Studio or on‑location • 60–90 minutes • online gallery.</p>
+        <p><strong>From $50</strong></p>
+      </div>
+      <div class="panel">
+        <h4>Events</h4>
+        <p>Coverage for conferences, concerts, weddings • candid + highlights • next‑day preview.</p>
+        <p><strong>From $50/hr</strong></p>
+      </div>
+      <div class="panel">
+        <h4>Editorial & Brand</h4>
+        <p>Concept, moodboard, shotlist, production • licensing tailored to usage.</p>
+        <p><strong>Custom</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="wrap section">
+    <h3 class="section-title">About</h3>
+    <div class="flex">
+      <div class="panel">
+        <h4>Artist Statement</h4>
+        <p>I photograph the intersection of people and place. My work aims to balance clean composition with atmospheric light, creating images that feel both intentional and effortless.</p>
+      </div>
+      <div class="panel">
+        <h4>Approach</h4>
+        <p>Collaborative pre‑production, location scouting, and natural‑light first. For controlled aesthetics I use compact strobes to keep scenes cinematic, not flashy.</p>
+      </div>
+      <div class="panel">
+        <h4>Clients</h4>
+        <p>Individuals, universities, nonprofits, and small businesses. References available upon request.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap section">
+    <h3 class="section-title">Book a Shoot</h3>
+    <p class="lead">Share a few details and I’ll reply with availability and a tailored quote.</p>
+    <form onsubmit="event.preventDefault(); alert('Thanks! Your message has been queued. Connect this form to your email service or backend.');">
+      <div class="flex" style="gap:12px">
+        <input aria-label="Your name" placeholder="Your name" required>
+        <input type="email" aria-label="Email" placeholder="Email" required>
+      </div>
+      <input aria-label="Subject" placeholder="Project or event" required>
+      <textarea aria-label="Message" placeholder="Tell me about your vision, dates, and location."></textarea>
+      <button type="submit">Send Inquiry</button>
+    </form>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <small>© <span id="year"></span> Through My Lens. All rights reserved.</small>
+        <div style="display:flex;gap:12px">
+          <a href="#" aria-label="Instagram" title="Instagram" style="color:var(--muted);text-decoration:none">Instagram</a>
+          <a href="#" aria-label="Twitter" title="Twitter" style="color:var(--muted);text-decoration:none">Twitter</a>
+          <a href="#" aria-label="LinkedIn" title="LinkedIn" style="color:var(--muted);text-decoration:none">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="lightbox" class="lightbox" aria-label="Image viewer">
+    <img alt="Expanded view" />
+  </dialog>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Tabs filtering
+    const tabs = document.querySelectorAll('.tab');
+    const cards = document.querySelectorAll('.card');
+    function setFilter(tag){
+      cards.forEach(c => {
+        const on = tag === 'all' || c.dataset.tags.includes(tag);
+        c.style.display = on ? '' : 'none';
+      });
+      tabs.forEach(t => t.setAttribute('aria-selected', t.dataset.filter === tag));
+    }
+    tabs.forEach(t => t.addEventListener('click', () => setFilter(t.dataset.filter)));
+
+    // Lightbox
+    const dlg = document.getElementById('lightbox');
+    const dlgImg = dlg.querySelector('img');
+    document.getElementById('gallery').addEventListener('click', e => {
+      const img = e.target.closest('img');
+      if(!img) return;
+      dlgImg.src = img.src; dlgImg.alt = img.alt; dlg.showModal();
+    });
+    dlg.addEventListener('click', e => { if(e.target === dlg) dlg.close(); });
+    window.addEventListener('keydown', e => { if(e.key === 'Escape' && dlg.open) dlg.close(); });
+
+    // Optional: deep link to a category via hash like #portfolio?cat=portrait
+    const params = new URLSearchParams(location.hash.split('?')[1]);
+    const cat = params.get('cat');
+    if(cat){ const btn = [...tabs].find(t=>t.dataset.filter===cat); if(btn) btn.click(); }
+  </script>
+</body>
+</html>
